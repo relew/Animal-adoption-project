@@ -3,7 +3,6 @@
 
 import pandas as pd
 import numpy as np
-import numpy as numpy
 import seaborn as sns
 import matplotlib.pyplot as plt
 from scipy.stats import ttest_ind
@@ -19,8 +18,6 @@ import pickle
 import dill
 
 
-import sys
-numpy.set_printoptions(threshold=sys.maxsize)
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -85,7 +82,7 @@ def age_to_months(item):
             age_to_months[i] = 0
     return age_to_months
 
-def color_bucketing(color):
+def color_bucketing(color, pd = pd):
     if type(color) is str:
         if 'black/white' in str(color):
             return pd.Series(['black/white','bicolor'])
@@ -154,7 +151,7 @@ def color_bucketing(color):
         else:
             return pd.Series(['other_color','other_colortype'])
         
-def time_extra_features(df):
+def time_extra_features(df, np = np):
     df["weekday_num_income"] = df["date_income"].dt.dayofweek
     df["weekend_income"] = np.where(df['weekday_num_income'] >= 5, 1, 0)
     df["month_num_income"] = df["date_income"].dt.month
@@ -224,7 +221,7 @@ def cat_breed_bucketing(breed):
         
 ########## MODELING FUNCTIONS ###########
 # converting the categorical features into numerical features using the built in 'get_dummies' function
-def numerical_convert(df):
+def numerical_convert(df, pd = pd):
     
     columns = ['intake_type', 'intake_condition',
                'animal_type', 'income_sex','income_neutered',
@@ -613,6 +610,7 @@ confusion_matrix(y_test, y_prediction)
 
 def convert_input(input_dict,
                   pd = pd,
+                  np = np,
                   all_lower = all_lower,
                   time_extra_features = time_extra_features,
                   dog_breed_bucketing = dog_breed_bucketing,
@@ -624,7 +622,7 @@ def convert_input(input_dict,
     df = pd.DataFrame([input_dict])
     df = all_lower(df)
     df['date_income']= pd.to_datetime(df['date_income'])
-    df = time_extra_features(df)
+    df = time_extra_features(df, np = np)
     df['intake_age_months'] = df['intake_age_months'].astype(float)
     df['IsMix'] = df['animal_breed'].str.contains('mix',case=False).astype(int)
     df[['color_buckets','color_type']] = df['animal_color'].apply(color_bucketing)

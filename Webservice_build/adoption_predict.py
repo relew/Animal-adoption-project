@@ -3,8 +3,6 @@ import pickle
 from flask import Flask
 from flask import request
 from flask import jsonify
-import numpy as np
-import pandas as pd
 import dill
 
 input_file = 'adoption_prediction.bin'
@@ -18,6 +16,7 @@ app = Flask('adoption_predict')
 
 @app.route('/adoption_predict', methods = ['POST'])
 def predict():
+
     input_json = request.get_json()
 
     input_df = convert_input_undrill(input_json)
