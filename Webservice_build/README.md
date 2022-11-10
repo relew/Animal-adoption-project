@@ -33,3 +33,6 @@
         -this 'XY-env.....com' will be the open url provided by amazon where you can test the solution
  4. open the flask_frontend.ipynb notebook and trigger the code using the aws url('http://XY-env......elasticbeanstalk.com/adoption_predict')
  5. optional: try out other dog and cat combinations
+ 
+ ![image](https://user-images.githubusercontent.com/45392447/201095211-feb66a9d-8493-4f2f-8b31-b422e874e4ba.png)
+
