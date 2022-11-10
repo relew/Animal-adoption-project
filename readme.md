@@ -1,6 +1,6 @@
 # Good day Sir/Madam,
 
-![Uploading dog-cat.jpg…]()
+![dog-cat](https://user-images.githubusercontent.com/45392447/201094720-45502302-a153-4bf3-9bc6-d1467000a3aa.jpg)
 
 # Project context:
 
